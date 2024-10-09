@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -143,8 +144,11 @@ export class ProductsService {
     }
   }
 
-  private handleDBExceptions(error: any) {
+  private handleDBExceptions(error: any): never {
+    if (error.code === '23505') throw new BadRequestException(error.detail);
+
     this.logger.error(error);
+
     throw new InternalServerErrorException(
       'Unexpected error, check server logs',
     );
