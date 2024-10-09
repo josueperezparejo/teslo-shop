@@ -1,4 +1,6 @@
-export const fileFilter = (
+import { v4 as uuid } from 'uuid';
+
+export const fileName = (
   request: Express.Request,
   file: Express.Multer.File,
   callback: Function,
@@ -7,11 +9,7 @@ export const fileFilter = (
 
   const fileExptension = file.mimetype.split('/')[1];
 
-  const validExptension = ['jpg', 'jpeg', 'png', 'gif'];
+  const fileName = `${uuid()}.${fileExptension}`;
 
-  if (validExptension.includes(fileExptension)) {
-    return callback(null, true);
-  }
-
-  return callback(null, false);
+  return callback(null, fileName);
 };
