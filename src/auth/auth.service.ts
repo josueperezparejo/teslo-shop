@@ -70,6 +70,13 @@ export class AuthService {
     };
   }
 
+  checkAuthStatus(user: User) {
+    return {
+      ...user,
+      token: this.getJwtToken({ email: user.email, id: user.id }),
+    };
+  }
+
   private handleDBExceptions(error: any): never {
     if (error.code === '23505') throw new BadRequestException(error.detail);
 
