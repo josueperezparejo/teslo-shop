@@ -13,6 +13,6 @@ async function bootstrap() {
     }),
   );
   await app.listen(3000);
-  logger.log(`App is running on Port: ${process.env.PORT}`);
+  logger.log(`App is running on Port: http://localhost:${process.env.PORT}`);
 }
 bootstrap();
